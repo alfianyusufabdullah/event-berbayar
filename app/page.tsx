@@ -13,6 +13,7 @@ export default async function Home() {
         {events.map((event) => (
           <Card key={event.id}>
             <CardHeader>
+              <img src="https://placehold.co/600x400" alt="Placeholder Image" className="mb-4 rounded-md" />
               <CardTitle>{event.name}</CardTitle>
               <CardDescription>
                 {dayjs(event.eventStart).format("DD MMMM YYYY, HH:mm")} - {dayjs(event.eventEnd).format("HH:mm")}

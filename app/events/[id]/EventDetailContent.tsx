@@ -78,6 +78,7 @@ export function EventDetailContent({ event }: EventDetailContentProps) {
       <div className="w-4/6">
         <Card className='mb-6'>
           <CardHeader>
+            <img src="https://placehold.co/600x400" alt="Placeholder Image" className="mb-4 rounded-md" />
             <CardTitle className="text-4xl font-bold">{event.name}</CardTitle>
             <CardDescription>
               {dayjs(event.eventStart).format("DD MMMM YYYY, HH:mm")} - {dayjs(event.eventEnd).format("HH:mm")}
