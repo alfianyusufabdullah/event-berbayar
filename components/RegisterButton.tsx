@@ -19,14 +19,14 @@ function SubmitButton() {
 }
 
 export function RegisterButton({ eventId }: { eventId: string }) {
-  const initialState: RegistrationState = { message: '', error: false };
+  const initialState: RegistrationState = { message: '', error: false, paymentUrl: '' };
   const [state, formAction] = useActionState(registerForEvent, initialState);
 
   useEffect(() => {
     if (state.paymentUrl) {
       window.location.href = state.paymentUrl;
     }
-  }, [state.paymentUrl]);
+  }, [state]);
 
   return (
     <Dialog>
