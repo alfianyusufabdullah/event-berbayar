@@ -38,17 +38,18 @@ export async function registerForEvent(
       eventId
     );
 
-    if (result.error) {
+    const registeredEvent = result.shift()
+    if (registeredEvent.error) {
       return {
-        message: result.message,
+        message: registeredEvent.message,
         error: true,
       };
     }
 
     return {
-      message: result.message,
+      message: registeredEvent.message,
       error: false,
-      paymentUrl: result.paymentUrl,
+      paymentUrl: registeredEvent.paymentUrl,
     };
   } catch (error) {
     console.log(`Error during registration: ${error}`);
