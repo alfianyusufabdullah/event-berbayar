@@ -19,7 +19,7 @@ export default async function Home() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p>{event.description}</p>
+              <p>{event.summary}</p>
             </CardContent>
             <CardFooter className="flex justify-between">
               <p className="font-bold">Rp{event.price.toLocaleString("id-ID")}</p>
