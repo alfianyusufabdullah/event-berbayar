@@ -50,7 +50,7 @@ export function EventDetailContent({ event }: EventDetailContentProps) {
     if (status) {
       if (status === "success") {
         setDialogTitle("Pembayaran Berhasil!");
-        setDialogMessage("Pembayaran Anda telah berhasil diproses.");
+        setDialogMessage("Pembayaran Anda telah berhasil diproses. Silakan periksa email Anda untuk detail lebih lanjut.");
       } else if (status === "failed") {
         setDialogTitle("Pembayaran Gagal!");
         setDialogMessage("Pembayaran Anda gagal. Mohon coba lagi.");
