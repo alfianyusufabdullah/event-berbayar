@@ -4,13 +4,14 @@ import { getEventById } from "@/lib/api";
 import dayjs from "dayjs";
 import { notFound } from "next/navigation";
 
-export default async function EventDetailPage({ params }: { params: { id: string } }) {
+export default async function EventDetailPage(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const event = await getEventById(params.id);
 
   if (!event) {
     notFound();
   }
-
+  
   return (
     <main className="container mx-auto p-8">
       <Card>
