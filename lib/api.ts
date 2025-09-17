@@ -65,7 +65,24 @@ export async function registerEvent(name: string, email: string, eventId: string
       name,
       email,
       eventId,
+      appUrl: process.env.APP_URL || 'http://localhost:3000',
     }),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to register for the event.');
+  }
+
+  return response.json();
+}
+
+export async function updatePayment(payload: Invoice) {
+  const response = await fetchWithAuth('https://n8n-sandbox.lokalan.space/webhook/devcoach/invoices', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload, null, 2),
   });
 
   if (!response.ok) {
