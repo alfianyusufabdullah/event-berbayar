@@ -1,5 +1,7 @@
 'use client';
 
+import { useActionState, useEffect, useState } from 'react';
+import { useFormStatus } from 'react-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter, DialogClose } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -8,7 +10,17 @@ import { Label } from "@/components/ui/label";
 import { getEventById } from "@/lib/api"; // Import getEventById to use its return type
 import dayjs from "dayjs";
 import { notFound, useRouter, useSearchParams, usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { registerForEvent, RegistrationState } from './actions';
+
+function SubmitButton() {
+  const { pending } = useFormStatus();
+
+  return (
+    <Button type="submit" disabled={pending} className="w-full">
+      {pending ? 'Registering...' : 'Daftar'}
+    </Button>
+  );
+}
 
 interface EventDetailContentProps {
   event: Awaited<ReturnType<typeof getEventById>>; 
@@ -22,8 +34,15 @@ export function EventDetailContent({ event }: EventDetailContentProps) {
   const [dialogMessage, setDialogMessage] = useState("");
   const [dialogTitle, setDialogTitle] = useState("");
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+
+  const initialState: RegistrationState = { message: '', error: false, paymentUrl: '' };
+  const [state, formAction] = useActionState(registerForEvent, initialState);
+
+  useEffect(() => {
+    if (state.paymentUrl) {
+      window.location.href = state.paymentUrl;
+    }
+  }, [state]);
 
   useEffect(() => {
     const status = searchParams.get("status");
@@ -50,16 +69,6 @@ export function EventDetailContent({ event }: EventDetailContentProps) {
 
   const handleRegisterClick = () => {
     setShowRegistrationForm(true);
-  };
-
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // TODO: Implement actual registration logic here
-    console.log("Registering with:", { name, email, eventId: event.id });
-    // For now, just reset the form and hide it
-    setName("");
-    setEmail("");
-    setShowRegistrationForm(false);
   };
 
   return (
@@ -94,16 +103,16 @@ export function EventDetailContent({ event }: EventDetailContentProps) {
                 </Button>
               </div>
             ) : (
-              <form onSubmit={handleFormSubmit} className="flex flex-col gap-4">
+              <form action={formAction} className="flex flex-col gap-4">
+                <input type="hidden" name="eventId" value={event.id} />
                 <p className="text-3xl font-bold">Rp{event.price.toLocaleString("id-ID")}</p>
                 <div className="grid w-full items-center gap-1.5">
                   <Label htmlFor="name">Nama Lengkap</Label>
                   <Input
                     type="text"
                     id="name"
+                    name="name"
                     placeholder="Nama Lengkap Anda"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
                     required
                   />
                 </div>
@@ -112,15 +121,15 @@ export function EventDetailContent({ event }: EventDetailContentProps) {
                   <Input
                     type="email"
                     id="email"
+                    name="email"
                     placeholder="email@example.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
                     required
                   />
                 </div>
-                <Button type="submit" className="w-full">
-                  Daftar
-                </Button>
+                {state.error && (
+                  <p className="text-red-500 text-sm text-center mb-4">{state.message}</p>
+                )}
+                <SubmitButton />
               </form>
             )}
           </CardContent>
