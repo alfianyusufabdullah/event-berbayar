@@ -53,3 +53,23 @@ export async function getEventById(id: string): Promise<Event | null> {
 
   return data;
 }
+
+export async function registerEvent(name: string, email: string, eventId: string) {
+  const response = await fetchWithAuth('https://n8n-sandbox.lokalan.space/webhook-test/devcoach/registration/create', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      name,
+      email,
+      eventId,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to register for the event.');
+  }
+
+  return response.json();
+}
