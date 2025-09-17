@@ -8,8 +8,7 @@ export default async function Home() {
   const events = await getEvents();
 
   return (
-    <main className="container mx-auto p-8">
-      <h1 className="text-4xl font-bold mb-8 text-center">Upcoming Events</h1>
+    <main className="container mx-auto mt-10 px-28">
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {events.map((event) => (
           <Card key={event.id}>

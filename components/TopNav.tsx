@@ -2,10 +2,10 @@ import Link from "next/link";
 
 export function TopNav() {
   return (
-    <nav className="bg-gray-800 text-white p-4">
-      <div className="container mx-auto">
+    <nav className="text-slate-900 shadow p-4">
+      <div className="container mx-auto px-28">
         <Link href="/" className="text-2xl font-bold">
-          ikut-devcoach
+          Developer Coaching Events
         </Link>
       </div>
     </nav>
