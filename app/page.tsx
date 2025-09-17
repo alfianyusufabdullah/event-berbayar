@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-
 import { getEvents } from "@/lib/api";
+import dayjs from "dayjs";
 
 export default async function Home() {
   const events = await getEvents();
@@ -15,7 +15,7 @@ export default async function Home() {
             <CardHeader>
               <CardTitle>{event.name}</CardTitle>
               <CardDescription>
-                {new Date(event.eventStart).toLocaleString()} - {new Date(event.eventEnd).toLocaleString()}
+                {dayjs(event.eventStart).format("DD MMMM YYYY, HH:mm")} - {dayjs(event.eventEnd).format("HH:mm")}
               </CardDescription>
             </CardHeader>
             <CardContent>
