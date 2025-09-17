@@ -1,18 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { getEventById } from "@/lib/api";
 import dayjs from "dayjs";
+import { notFound } from "next/navigation";
 
-// Dummy data for a single event
-const event = {
-  id: "event-1223",
-  name: "DevCoach 1",
-  description: "Ini adalah devCoach 1",
-  eventStart: "9/17/2025 15:30:00",
-  eventEnd: "9/17/2025 17:30:00",
-  price: 57000,
-};
+export default async function EventDetailPage({ params }: { params: { id: string } }) {
+  const event = await getEventById(params.id);
 
-export default function EventDetailPage({ params }: { params: { id: string } }) {
+  if (!event) {
+    notFound();
+  }
+
   return (
     <main className="container mx-auto p-8">
       <Card>
