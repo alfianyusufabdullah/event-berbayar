@@ -2,6 +2,7 @@
 
 import { useActionState, useEffect, useState } from 'react';
 import { useFormStatus } from 'react-dom';
+import Markdown from 'markdown-to-jsx';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter, DialogClose } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -75,7 +76,7 @@ export function EventDetailContent({ event }: EventDetailContentProps) {
     <main className="container mx-auto px-28 mt-10 flex gap-8">
       {/* Left Section: Event Content (70%) */}
       <div className="w-4/6">
-        <Card>
+        <Card className='mb-6'>
           <CardHeader>
             <CardTitle className="text-4xl font-bold">{event.name}</CardTitle>
             <CardDescription>
@@ -83,14 +84,16 @@ export function EventDetailContent({ event }: EventDetailContentProps) {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <p className="text-lg">{event.description}</p>
+            <div className='prose min-w-full'>
+              <Markdown>{event.description}</Markdown>
+            </div>
           </CardContent>
         </Card>
       </div>
 
       {/* Right Section: Price / Registration Form (30%) */}
       <div className="w-2/6">
-        <Card>
+        <Card className='sticky top-7'>
           <CardHeader>
             <CardTitle className="text-2xl font-bold">Harga Tiket</CardTitle>
           </CardHeader>
