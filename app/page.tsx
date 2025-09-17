@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { getEvents } from "@/lib/api";
 import dayjs from "dayjs";
+import Link from "next/link";
 
 export default async function Home() {
   const events = await getEvents();
@@ -23,7 +24,9 @@ export default async function Home() {
             </CardContent>
             <CardFooter className="flex justify-between">
               <p className="font-bold">Rp{event.price.toLocaleString("id-ID")}</p>
-              <Button>View Event</Button>
+              <Link href={`/events/${event.id}`}>
+                <Button>View Event</Button>
+              </Link>
             </CardFooter>
           </Card>
         ))}
