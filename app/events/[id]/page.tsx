@@ -25,7 +25,7 @@ export default async function EventDetailPage({ params }: { params: { id: string
         </CardContent>
         <CardFooter className="flex justify-between items-center">
           <p className="text-2xl font-bold">Rp{event.price.toLocaleString("id-ID")}</p>
-                    <RegisterButton />
+                    <RegisterButton eventId={event.id} />
         </CardFooter>
       </Card>
     </main>
