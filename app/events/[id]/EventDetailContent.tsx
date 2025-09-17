@@ -95,43 +95,59 @@ export function EventDetailContent({ event }: EventDetailContentProps) {
       {/* Right Section: Price / Registration Form (30%) */}
       <div className="w-2/6">
         <Card className='sticky top-7'>
-          <CardHeader>
-            <CardTitle className="text-2xl font-bold">Harga Tiket</CardTitle>
+          <CardHeader className="pb-4">
+            <CardTitle className="text-3xl font-extrabold text-gray-900 dark:text-white">
+              Harga Tiket
+            </CardTitle>
+            <CardDescription className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+              Informasi pendaftaran dan pembayaran event.
+            </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pt-4 border-t border-gray-200 dark:border-gray-700">
             {!showRegistrationForm ? (
-              <div className="flex flex-col gap-4">
-                <p className="text-3xl font-bold">Rp{event.price.toLocaleString("id-ID")}</p>
-                <Button onClick={handleRegisterClick} className="w-full">
+              <div className="flex flex-col gap-4 items-center text-center">
+                <p className="text-md text-gray-700 dark:text-gray-300">{event.summary}</p>
+                <p className="text-4xl font-bold text-indigo-600 py-2">
+                  Rp{event.price.toLocaleString("id-ID")}
+                </p>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Jangan lewatkan kesempatan ini!</p>
+                <Button onClick={handleRegisterClick} className="w-full py-5 text-lg">
                   Daftar Sekarang
                 </Button>
               </div>
             ) : (
-              <form action={formAction} className="flex flex-col gap-4">
+              <form action={formAction} className="flex flex-col gap-5">
                 <input type="hidden" name="eventId" value={event.id} />
-                <p className="text-3xl font-bold">Rp{event.price.toLocaleString("id-ID")}</p>
-                <div className="grid w-full items-center gap-1.5">
-                  <Label htmlFor="name">Nama Lengkap</Label>
+                <p className="text-4xl font-bold text-indigo-600 text-center">
+                  Rp{event.price.toLocaleString("id-ID")}
+                </p>
+                <div className="grid w-full items-center gap-2">
+                  <Label htmlFor="name" className="text-sm font-medium text-gray-700 dark:text-gray-300">Nama Lengkap</Label>
                   <Input
                     type="text"
                     id="name"
                     name="name"
                     placeholder="Nama Lengkap Anda"
                     required
+                    className="p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
-                <div className="grid w-full items-center gap-1.5">
-                  <Label htmlFor="email">Email</Label>
+                <div className="grid w-full items-center gap-2">
+                  <Label htmlFor="email" className="text-sm font-medium text-gray-700 dark:text-gray-300">Email</Label>
                   <Input
                     type="email"
                     id="email"
                     name="email"
                     placeholder="email@example.com"
                     required
+                    className="p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
                   />
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    Invoice pembayaran akan dikirimkan ke email ini. Pastikan email yang dimasukkan benar.
+                  </p>
                 </div>
                 {state.error && (
-                  <p className="text-red-500 text-sm text-center mb-4">{state.message}</p>
+                  <p className="text-red-600 text-sm text-center font-medium mt-2">{state.message}</p>
                 )}
                 <SubmitButton />
               </form>
