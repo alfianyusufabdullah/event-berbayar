@@ -19,7 +19,37 @@ export async function getEvents(): Promise<Event[]> {
   }
 
   const data = await response.json();
-  
-  // The API returns a single object, but we will wrap it in an array to handle it as a list.
   return Array.isArray(data) ? data : [data];
+}
+
+export async function getEventById(id: string): Promise<Event | null> {
+  const response = await fetchWithAuth(`https://n8n-sandbox.lokalan.space/webhook/devcoach/events?id=${id}`, {
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    if (response.status === 404) {
+      return null;
+    }
+    throw new Error("Failed to fetch event");
+  }
+
+  const data = await response.json();
+
+  if (!data) {
+    return null;
+  }
+
+  if (Array.isArray(data)) {
+    if (data.length === 0) {
+      return null;
+    }
+    return data[0];
+  }
+
+  if (Object.keys(data).length === 0) {
+    return null;
+  }
+
+  return data;
 }
