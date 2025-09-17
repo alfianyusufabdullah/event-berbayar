@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
     CF_ACCESS_CLIENT_SECRET: process.env.CF_ACCESS_CLIENT_SECRET,
     APP_URL: process.env.APP_URL,
   },
+  output: "standalone",
 };
 
 export default nextConfig;
