@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { RegisterButton } from "@/components/RegisterButton";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { getEventById } from "@/lib/api";
 import dayjs from "dayjs";
@@ -25,7 +25,7 @@ export default async function EventDetailPage({ params }: { params: { id: string
         </CardContent>
         <CardFooter className="flex justify-between items-center">
           <p className="text-2xl font-bold">Rp{event.price.toLocaleString("id-ID")}</p>
-          <Button size="lg">Register for this Event</Button>
+                    <RegisterButton />
         </CardFooter>
       </Card>
     </main>
