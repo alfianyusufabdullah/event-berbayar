@@ -4,6 +4,7 @@ export interface Event {
   id: string;
   name: string;
   description: string;
+  summary: string;
   eventStart: string;
   eventEnd: string;
   price: number;
