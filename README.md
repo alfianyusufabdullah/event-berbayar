@@ -75,10 +75,12 @@ pnpm start
 Create a `.env.local` file in the root of your project and add the following environment variables:
 
 ```
+# Only required if your n8n instance is protected by Cloudflare Access Zero Trust
 CF_ACCESS_CLIENT_ID=xxx.access
 CF_ACCESS_CLIENT_SECRET=xxx
 
-APP_URL=https://devcoach.lokalan.space
+N8N_INSTANCE_URL=your_n8n_instance_url
+APP_URL=https://sub.app.com
 ```
 
 
