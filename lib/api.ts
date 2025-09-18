@@ -11,7 +11,7 @@ export interface Event {
 }
 
 export async function getEvents(): Promise<Event[]> {
-  const response = await fetchWithAuth("https://n8n-sandbox.lokalan.space/webhook/devcoach/events", {
+  const response = await fetchWithAuth(process.env.N8N_INSTANCE_URL + "/webhook/devcoach/events", {
     cache: "no-store",
   });
 
@@ -24,7 +24,7 @@ export async function getEvents(): Promise<Event[]> {
 }
 
 export async function getEventById(id: string): Promise<Event | null> {
-  const response = await fetchWithAuth(`https://n8n-sandbox.lokalan.space/webhook/devcoach/events?id=${id}`, {
+  const response = await fetchWithAuth(process.env.N8N_INSTANCE_URL + `/webhook/devcoach/events?id=${id}`, {
     cache: "no-store",
   });
 
@@ -56,7 +56,7 @@ export async function getEventById(id: string): Promise<Event | null> {
 }
 
 export async function registerEvent(name: string, email: string, eventId: string) {
-  const response = await fetchWithAuth('https://n8n-sandbox.lokalan.space/webhook/devcoach/registration/create', {
+  const response = await fetchWithAuth(process.env.N8N_INSTANCE_URL + '/webhook/devcoach/registration/create', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ export async function registerEvent(name: string, email: string, eventId: string
 }
 
 export async function updatePayment(payload: Invoice) {
-  const response = await fetchWithAuth('https://n8n-sandbox.lokalan.space/webhook/devcoach/invoices', {
+  const response = await fetchWithAuth(process.env.N8N_INSTANCE_URL + '/webhook/devcoach/invoices', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
