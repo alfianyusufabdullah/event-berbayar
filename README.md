@@ -35,7 +35,7 @@ Follow these instructions to get a copy of the project up and running on your lo
 1.  **Clone the repository:**
     ```bash
     git clone https://github.com/dicodingacademy/event-berbayar.git
-    cd ikut-devcoach
+    cd event-berbayar
     ```
 
 2.  **Install dependencies:**
