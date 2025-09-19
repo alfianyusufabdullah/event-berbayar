@@ -7,6 +7,18 @@ const nextConfig: NextConfig = {
     APP_URL: process.env.APP_URL,
     N8N_INSTANCE_URL: process.env.N8N_INSTANCE_URL,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "placehold.co",
+      },
+      {
+        protocol: "https",
+        hostname: "picsum.photos",
+      },
+    ],
+  },
   output: "standalone",
 };
 
